@@ -11,7 +11,7 @@ import journey4 from "@/assets/patient-journey-4.jpg.asset.json";
 import journey5 from "@/assets/patient-journey-5.jpg.asset.json";
 import journey6 from "@/assets/patient-journey-6.jpg.asset.json";
 import tanjaImage from "@/assets/tanja-before-after.png.asset.json";
-import logo from "@/assets/vox-care-logo.png.asset.json";
+import logo from "@/assets/vox-care-logo-cropped.png.asset.json";
 import heroImage from "@/assets/vox-hero-clinical.png.asset.json";
 import { Button } from "@/components/ui/button";
 import {
@@ -124,7 +124,7 @@ function Index() {
       <header className="sticky top-0 z-50 border-b border-border/80 bg-background/90 backdrop-blur-xl">
         <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-5 sm:px-8">
           <a href="#top" aria-label="VOX Care home" className="block">
-            <img src={logo.url} alt="VOX Care" className="h-10 w-auto max-w-40 object-contain object-left sm:h-12" />
+            <img src={logo.url} alt="VOX Care" className="h-12 w-auto max-w-40 object-contain object-left sm:h-14" />
           </a>
           <div className="flex items-center gap-3 sm:gap-6">
             <a href="mailto:voxhealthcaree@gmail.com" className="hidden text-sm font-medium text-muted-foreground transition-colors hover:text-foreground sm:block">
@@ -143,10 +143,10 @@ function Index() {
             <img src={heroImage.url} alt="A doctor examining a patient’s throat" className="absolute inset-0 h-full w-full object-cover object-center" />
             <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/35 to-transparent" />
             <div className="relative z-10 flex min-h-[calc(100svh-7rem)] flex-col justify-end px-5 pb-7 pt-32 sm:min-h-[760px] sm:px-12 sm:pb-12 lg:px-16">
-              <p className="mb-4 text-xs font-semibold uppercase tracking-[0.18em] text-cyan animate-rise">VOX · Voice Restoration · Non-Profit R&amp;D</p>
+              <p className="mb-4 text-xs font-semibold uppercase tracking-[0.16em] text-cyan animate-rise">VOX · Voice Restoration · Non-Profit R&amp;D</p>
               <div className="grid items-end gap-8 lg:grid-cols-[1.25fr_0.75fr]">
                 <div className="max-w-4xl animate-rise [animation-delay:100ms]">
-                  <h1 className="text-balance text-5xl font-extrabold leading-[0.98] text-background sm:text-7xl lg:text-[6.5rem]">
+                  <h1 className="text-balance text-[2.7rem] font-extrabold leading-[1.02] text-background sm:text-7xl lg:text-[6.5rem]">
                     Not just a voice.<br />Their voice, back.
                   </h1>
                   <p className="mt-6 max-w-2xl text-base leading-7 text-background/85 sm:text-xl sm:leading-8">
