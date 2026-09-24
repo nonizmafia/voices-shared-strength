@@ -14,7 +14,33 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      campaign_totals: {
+        Row: {
+          campaign_slug: string
+          currency: string
+          goal_amount: number
+          id: string
+          raised_amount: number
+          updated_at: string
+        }
+        Insert: {
+          campaign_slug: string
+          currency?: string
+          goal_amount: number
+          id?: string
+          raised_amount?: number
+          updated_at?: string
+        }
+        Update: {
+          campaign_slug?: string
+          currency?: string
+          goal_amount?: number
+          id?: string
+          raised_amount?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
