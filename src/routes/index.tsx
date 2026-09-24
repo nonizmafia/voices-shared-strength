@@ -225,7 +225,7 @@ function Index() {
             <div>
               <p className="mb-4 text-xs font-bold uppercase tracking-[0.18em] text-primary">Patient perspective</p>
               <h2 className="text-4xl font-bold leading-tight sm:text-6xl">Hear their story.</h2>
-              <p className="mt-5 max-w-md text-base leading-7 text-muted-foreground">A personal account of voice, recovery and life after cancer treatment.</p>
+              <p className="mt-5 max-w-md text-base leading-7 text-muted-foreground">Tanja shares what life is really like after losing her voice. Listen closely — the robotic sound you hear in the video is the voice today&apos;s devices give people. That mechanical voice is exactly the problem VOX exists to solve.</p>
             </div>
             <div className="overflow-hidden rounded-[4px] bg-ink shadow-float">
               <iframe className="aspect-video w-full" src="https://www.youtube-nocookie.com/embed/OGynMqAUHiY" title="Patient story about life after cancer" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen />
@@ -264,30 +264,41 @@ function Index() {
         </section>
 
         <section className="mx-auto max-w-7xl px-5 py-24 sm:px-8 sm:py-32">
-          <div className="grid gap-14 lg:grid-cols-2">
-            <div>
-              <p className="mb-5 text-xs font-bold uppercase tracking-[0.18em] text-primary">Transparent by design</p>
-              <h2 className="max-w-lg text-4xl font-bold leading-tight sm:text-6xl">Where your donation goes.</h2>
-            </div>
-            <ol className="divide-y divide-border border-y border-border">
-              {["Prototype engineering", "Voice technology development & testing", "Patient testing"].map((item, index) => (
-                <li key={item} className="flex items-center gap-5 py-7">
-                  <span className="text-xs font-bold text-primary">0{index + 1}</span>
-                  <span className="flex-1 text-lg font-semibold">{item}</span>
-                  <span className="text-xs font-bold uppercase tracking-[0.16em] text-muted-foreground">R&amp;D</span>
-                </li>
-              ))}
-            </ol>
+          <div className="mb-12 max-w-2xl">
+            <p className="mb-5 text-xs font-bold uppercase tracking-[0.18em] text-primary">Transparent by design</p>
+            <h2 className="text-4xl font-bold leading-tight sm:text-6xl">Where your donation goes.</h2>
+            <p className="mt-5 text-lg leading-8 text-muted-foreground">Three concrete stages take the VOX device from the workbench to the people who need it.</p>
           </div>
+          <div className="grid gap-5 md:grid-cols-3">
+            {[
+              { icon: Wrench, title: "Prototype engineering", text: "Designing and building the core VOX hardware — the device that will carry a person's own voice." },
+              { icon: AudioLines, title: "Voice technology development & testing", text: "Refining the voice technology until it sounds naturally like the person speaking — never like a machine." },
+              { icon: Users, title: "Patient testing", text: "Placing the device in real patients' hands and improving it with their honest feedback." },
+            ].map((stage, index) => (
+              <div key={stage.title} className="group relative overflow-hidden border border-border bg-background p-8 transition-shadow duration-300 hover:shadow-float">
+                <span className="pointer-events-none absolute right-5 top-4 text-6xl font-extrabold text-muted/40 transition-colors duration-300 group-hover:text-primary/20">0{index + 1}</span>
+                <div className="mb-8 flex size-12 items-center justify-center bg-primary text-primary-foreground">
+                  <stage.icon className="size-6" />
+                </div>
+                <h3 className="mb-3 pr-10 text-xl font-bold leading-snug">{stage.title}</h3>
+                <p className="text-base leading-7 text-muted-foreground">{stage.text}</p>
+              </div>
+            ))}
+          </div>
+          <p className="mt-8 flex items-center gap-2 text-sm font-medium text-muted-foreground"><span className="size-2 bg-cyan" /> 100% of every donation funds these three stages — nothing else.</p>
         </section>
 
         <section className="border-t border-border bg-panel py-24 sm:py-32">
           <div className="mx-auto grid max-w-7xl gap-14 px-5 sm:px-8 lg:grid-cols-2">
             <h2 className="text-4xl font-bold sm:text-6xl">Questions,<br />answered.</h2>
-            <Accordion type="single" collapsible className="border-t border-border">
-              <AccordionItem value="use"><AccordionTrigger className="py-6 text-left text-base hover:no-underline">What will my donation be used for?</AccordionTrigger><AccordionContent className="pb-6 text-base leading-7 text-muted-foreground">Entirely for R&amp;D and testing of the VOX device — no other use.</AccordionContent></AccordionItem>
-              <AccordionItem value="gift"><AccordionTrigger className="py-6 text-left text-base hover:no-underline">Do I get anything for donating?</AccordionTrigger><AccordionContent className="pb-6 text-base leading-7 text-muted-foreground">Donations above ₹5,000 are eligible for a gift.</AccordionContent></AccordionItem>
-            </Accordion>
+              <Accordion type="single" collapsible className="border-t border-border">
+                <AccordionItem value="use"><AccordionTrigger className="py-6 text-left text-base hover:no-underline">What will my donation be used for?</AccordionTrigger><AccordionContent className="pb-6 text-base leading-7 text-muted-foreground">Entirely for R&amp;D and testing of the VOX device — no other use.</AccordionContent></AccordionItem>
+                <AccordionItem value="gift"><AccordionTrigger className="py-6 text-left text-base hover:no-underline">Do I get anything for donating?</AccordionTrigger><AccordionContent className="pb-6 text-base leading-7 text-muted-foreground">Donations above ₹5,000 are eligible for a gift.</AccordionContent></AccordionItem>
+                <AccordionItem value="how"><AccordionTrigger className="py-6 text-left text-base hover:no-underline">How do I actually donate?</AccordionTrigger><AccordionContent className="pb-6 text-base leading-7 text-muted-foreground">Choose an amount in the donation section above. Our team will then reach out to you with the next steps.</AccordionContent></AccordionItem>
+                <AccordionItem value="updates"><AccordionTrigger className="py-6 text-left text-base hover:no-underline">Will I know how my donation is used?</AccordionTrigger><AccordionContent className="pb-6 text-base leading-7 text-muted-foreground">Yes. Every supporter receives progress updates as the VOX device moves from prototype to patient testing.</AccordionContent></AccordionItem>
+                <AccordionItem value="corporate"><AccordionTrigger className="py-6 text-left text-base hover:no-underline">Can my company or organisation support VOX?</AccordionTrigger><AccordionContent className="pb-6 text-base leading-7 text-muted-foreground">Absolutely. Write to voxhealthcaree@gmail.com and we&apos;ll set up a partnership that fits your organisation.</AccordionContent></AccordionItem>
+                <AccordionItem value="timeline"><AccordionTrigger className="py-6 text-left text-base hover:no-underline">When will the VOX device reach patients?</AccordionTrigger><AccordionContent className="pb-6 text-base leading-7 text-muted-foreground">The device is in active R&amp;D and testing. Your donation directly accelerates the path to the first patients.</AccordionContent></AccordionItem>
+              </Accordion>
           </div>
         </section>
       </main>
