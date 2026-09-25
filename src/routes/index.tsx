@@ -1,5 +1,6 @@
 import { queryOptions, useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { useServerFn } from "@tanstack/react-start";
 import { ArrowLeft, ArrowRight, ArrowUpRight, Check, Gift, Mail } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
@@ -23,6 +24,9 @@ import {
 } from "@/components/ui/accordion";
 import { supabase } from "@/integrations/supabase/client";
 import { getCampaignTotal, type CampaignTotal } from "@/lib/campaign.functions";
+import { createDonationCheckout } from "@/lib/donation.functions";
+import { ShareButtons } from "@/components/share-buttons";
+import { CAMPAIGN_TITLE, CAMPAIGN_DESCRIPTION, SITE_URL } from "@/lib/site";
 
 const campaignQuery = queryOptions({
   queryKey: ["campaign-total", "vox-care"],
@@ -207,6 +211,10 @@ function Index() {
               <p>Many people who go through a laryngectomy struggle with depression and anxiety and can withdraw from society. Tanja&apos;s children are her driving force to adapt, live and thrive — to be the confident, outgoing, social mum who does not let an unusual voice hold her back.</p>
               <p>She still feels self-conscious in public. People sometimes stare or ask insensitive questions. Some days her voice does not work properly; the skin around her stoma can be sore, her valve may leak, or reflux makes speaking harder.</p>
               <p className="border-l-2 border-cyan pl-5 text-xl font-semibold text-background">“Four years on, I&apos;m still learning to love my voice. I&apos;m also just really loving living my life. Life is too short not to, and life is for living.”</p>
+              <div className="flex flex-wrap items-center gap-4 pt-4">
+                <Link to="/stories/tanja-clara" className="text-sm font-semibold text-cyan underline-offset-4 hover:underline">Read &amp; share Tanja&apos;s story →</Link>
+                <Link to="/share-your-story" className="text-sm font-semibold text-background/80 underline-offset-4 hover:underline">Are you a patient? Share your story →</Link>
+              </div>
             </div>
           </div>
         </section>
@@ -271,11 +279,16 @@ function Index() {
                   <span className="absolute left-5 top-1/2 -translate-y-1/2 text-lg text-primary-foreground/65">₹</span>
                   <input type="number" min="1" inputMode="numeric" placeholder="Custom amount" value={customAmount} onFocus={() => setSelectedAmount("custom")} onChange={(event) => { setSelectedAmount("custom"); setCustomAmount(event.target.value); }} className="h-16 w-full rounded-none border border-primary-foreground/35 bg-transparent pl-10 pr-5 text-base text-primary-foreground outline-none placeholder:text-primary-foreground/60 focus:border-primary-foreground" />
                 </label>
-                <Button type="button" variant="secondary" className="h-16 rounded-none px-8 text-base" disabled={selectedAmount === "custom" && donationValue <= 0} onClick={donate}>
-                  Donate now <ArrowUpRight />
+                <Button type="button" variant="secondary" className="h-16 rounded-none px-8 text-base" disabled={paying || (selectedAmount === "custom" && donationValue <= 0)} onClick={donate}>
+                  {paying ? "Opening secure checkout…" : <>Donate now <ArrowUpRight /></>}
                 </Button>
               </div>
+              {payError && <p role="alert" className="text-sm font-semibold text-primary-foreground">{payError}</p>}
               <p className="flex items-center gap-2 text-sm text-primary-foreground/75"><Gift className="size-4" /> Donations above ₹5,000 are eligible for a gift.</p>
+              <div className="border-t border-primary-foreground/20 pt-5 [&_a]:border-primary-foreground/40 [&_a]:text-primary-foreground [&_button]:border-primary-foreground/40 [&_button]:text-primary-foreground [&_svg]:text-primary-foreground">
+                <p className="mb-3 text-sm text-primary-foreground/75">Can&apos;t give today? Sharing helps just as much.</p>
+                <ShareButtons url={SITE_URL} title={CAMPAIGN_TITLE} text={CAMPAIGN_DESCRIPTION} />
+              </div>
             </div>
           </div>
         </section>
