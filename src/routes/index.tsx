@@ -111,9 +111,25 @@ function Index() {
   }, [queryClient]);
 
   const donationValue = selectedAmount === "custom" ? Number(customAmount) : selectedAmount;
-  const donate = () => {
-    const subject = donationValue > 0 ? `VOX Care donation — ₹${donationValue.toLocaleString("en-IN")}` : "VOX Care donation";
-    window.location.href = `mailto:voxhealthcaree@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent("Hello VOX Care,\n\nI would like to support your voice restoration R&D. Please share the donation details.\n")}`;
+  const startCheckout = useServerFn(createDonationCheckout);
+  const [paying, setPaying] = useState(false);
+  const [payError, setPayError] = useState<string | null>(null);
+  const donate = async () => {
+    if (!(donationValue >= 100)) {
+      setPayError("The minimum donation is ₹100.");
+      return;
+    }
+    setPaying(true);
+    setPayError(null);
+    try {
+      const res = await startCheckout({ data: { amount: Math.round(donationValue), origin: window.location.origin } });
+      if (res.ok) window.location.href = res.url;
+      else setPayError(res.error);
+    } catch {
+      setPayError("The payment could not be started. Please try again.");
+    } finally {
+      setPaying(false);
+    }
   };
 
   const scrollGallery = (direction: number) => {
