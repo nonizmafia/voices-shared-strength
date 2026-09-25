@@ -10,33 +10,69 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ShareYourStoryRouteImport } from './routes/share-your-story'
+import { Route as DonateThankYouRouteImport } from './routes/donate.thank-you'
+import { Route as StoriesTanjaClaraRouteImport } from './routes/stories.tanja-clara'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ShareYourStoryRoute = ShareYourStoryRouteImport.update({
+  id: '/share-your-story',
+  path: '/share-your-story',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DonateThankYouRoute = DonateThankYouRouteImport.update({
+  id: '/donate/thank-you',
+  path: '/donate/thank-you',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StoriesTanjaClaraRoute = StoriesTanjaClaraRouteImport.update({
+  id: '/stories/tanja-clara',
+  path: '/stories/tanja-clara',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/share-your-story': typeof ShareYourStoryRoute
+  '/donate/thank-you': typeof DonateThankYouRoute
+  '/stories/tanja-clara': typeof StoriesTanjaClaraRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/share-your-story': typeof ShareYourStoryRoute
+  '/donate/thank-you': typeof DonateThankYouRoute
+  '/stories/tanja-clara': typeof StoriesTanjaClaraRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/share-your-story': typeof ShareYourStoryRoute
+  '/donate/thank-you': typeof DonateThankYouRoute
+  '/stories/tanja-clara': typeof StoriesTanjaClaraRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    '/' | '/share-your-story' | '/donate/thank-you' | '/stories/tanja-clara'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/share-your-story' | '/donate/thank-you' | '/stories/tanja-clara'
+  id:
+    | '__root__'
+    | '/'
+    | '/share-your-story'
+    | '/donate/thank-you'
+    | '/stories/tanja-clara'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ShareYourStoryRoute: typeof ShareYourStoryRoute
+  DonateThankYouRoute: typeof DonateThankYouRoute
+  StoriesTanjaClaraRoute: typeof StoriesTanjaClaraRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +84,35 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/share-your-story': {
+      id: '/share-your-story'
+      path: '/share-your-story'
+      fullPath: '/share-your-story'
+      preLoaderRoute: typeof ShareYourStoryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/donate/thank-you': {
+      id: '/donate/thank-you'
+      path: '/donate/thank-you'
+      fullPath: '/donate/thank-you'
+      preLoaderRoute: typeof DonateThankYouRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/stories/tanja-clara': {
+      id: '/stories/tanja-clara'
+      path: '/stories/tanja-clara'
+      fullPath: '/stories/tanja-clara'
+      preLoaderRoute: typeof StoriesTanjaClaraRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ShareYourStoryRoute: ShareYourStoryRoute,
+  DonateThankYouRoute: DonateThankYouRoute,
+  StoriesTanjaClaraRoute: StoriesTanjaClaraRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
