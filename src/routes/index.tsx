@@ -1,7 +1,7 @@
 import { queryOptions, useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
-import { ArrowLeft, ArrowRight, ArrowUpRight, Check, Gift, Mail } from "lucide-react";
+import { ArrowLeft, ArrowRight, ArrowUpRight, AudioLines, Check, Gift, Mail, Users, Wrench } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
 import journeyCover from "@/assets/patient-journey-cover.png.asset.json";
